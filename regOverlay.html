@@ -1,0 +1,83 @@
+<div class="modal fade" id="registerModal" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header" style="padding: 35px 50px;">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4><span class="glyphicon glyphicon-user"></span> Register</h4>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-md-6 col-sm-6">
+            <form role="form" method="POST" action="register.php">
+            <div class="form-group">
+              <label for="name">Name<font color="red">*</font></label>
+              <input type="text" class="form-control" id="Name" name="name" placeholder="FirstName LastName" required>
+            </div>
+            <div class="form-group">
+              <label for="usern">Username<font colot="red">*</font></label>
+              <input type="text-align" class="form-control" id="usern" name="usern" placeholder="Can contain any character" required>
+            </div>
+            <div class="form-group">
+              <label for="email">Email<font color="red">*</font></label>
+              <input type="email" class="form-control" id="email" name="email" placeholder="someone@xyz.com" required></small>
+            </div>
+            <div class="form-group">
+              <label for="dob">Date of Birth<font color="red">*</font></label>
+              <div class='input-group date' id='datepick' data-provide="datepicker">
+                  <input type='text' class="form-control" placeholder="dd/mm/yyyy" name='dob' data-format="dd/mm/yyyy" required>
+                  <span class="input-group-addon">
+                      <span class="glyphicon glyphicon-th"></span>
+                  </span>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="phone">Phone Number</label>
+              <input type="tel" class="form-control" id="phone" name="phone" placeholder="">
+            </div>
+            <button type="submit" class="btn btn-success btn-block">Register</button>
+          </form>
+          </div>
+          <div class="col-md-6 col-sm-6">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+$(document).ready(function(){
+    $("#login").click(function(){
+        $("#loginModal").modal();
+    });
+});
+
+$(document).ready(function(){
+  $("#register").click(function(){
+    $("#registerModal").modal();
+  });
+});
+
+$(document).ready(function(){
+  $("#signup").click(function(){
+    $("#registerModal").modal();
+  });
+
+
+  $(document).ready(function(){
+    $("#phone").intlTelInput({
+      preferredCountries: []
+    });
+  });
+
+  $(document).ready(function(){
+    $('#datepick').datepicker({
+      format: 'dd/mm/yyyy',
+      startDate: '01/01/1900',
+    }).on('changeDate', function(ev){
+      $(this).datepicker('hide');
+    });
+  });
+});
+
+</script>
