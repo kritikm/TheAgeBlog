@@ -5,18 +5,29 @@
 </head>
 <body>
 <?php
-if(!empty($_POST))
-{
-  $username = $_POST["username"];
-  $password = $_POST["password"];
+  session_start();
+  if(!empty($_POST))
+  {
+    $username = $_POST["username"];
+    $password = $_POST["password"];
 
-  if(empty($username) && empty($password))
-    $errors[] = "Don't leave username and password empty";
-  else if(empty($username))
-    $errors[] = "Don't leave username empty";
-  else
-    $errors[] = "Don't leave password empty";
-}
+    $conn = mysqli_connect('localhost', 'root', 'tdkdetective');
+    @mysqli_select_db($conn, 'test') or die ("Our server is facing probelms");
+
+    $query = "SELECT name FROM USER WHERE username = '$username' and password = '$password'";
+    $result = mysqli_query($conn, $query);
+
+    if(mysqli_num_rows($result) == 1)
+    {
+      $_SESSION['logged'] = true;
+      $_SESSION['username'] = $username;
+      header("Location: index.php");
+    }
+    else {
+      echo "<script>window.alert('Invalid username-password combo');</script>";
+    }
+
+  }
 ?>
 </body>
 </html>

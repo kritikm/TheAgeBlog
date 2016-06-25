@@ -1,3 +1,7 @@
+<?php
+  session_start();
+ ?>
+
 <nav class="navbar navbar-inverse navbar-fixed-top">
   <div class="container">
     <div class="navbar-header">
@@ -36,7 +40,7 @@
       <ul class="nav navbar-nav navbar-right">
         <?php
           if(isset($_SESSION['logged']))
-            echo "<a href='index.php'>", $_SESSION['username'], "</a>";
+            echo "<li><a href='index.php'>", $_SESSION['username'], "</a></li><li><a href='logout.php'>Log out</a></li>";
           else {
             echo '<li><a href="#register" id="register"><span class="glyphicon glyphicon-user"></span> Register</a></li>';
             echo '<li><a href="#login" id="login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>';
@@ -59,11 +63,11 @@
           <form role="form" method="POST" action="login.php">
             <div class="form-group">
               <label for="usrname">Username</label>
-              <input type="text" class="form-control" id="username" placeholder="username">
+              <input type="text" class="form-control" id="usrname" name="username" placeholder="username">
             </div>
             <div class="form-group">
               <label for="psw"><span class="glyphicon glyhpicon-eye-open"></span> Password</label>
-              <input type="password" class="form-control" id="password" placeholder="password">
+              <input type="password" class="form-control" id="password" name="password" placeholder="password">
             </div>
             <div class="checkbox">
               <label><input type="checkbox" value="" checked>Remember me</label>
@@ -100,7 +104,11 @@
               </div>
               <div class="form-group">
                 <label for="usern">Username<font colot="red">*</font></label>
-                <input type="text-align" class="form-control" id="usern" name="usern" placeholder="Can contain any character" required>
+                <input type="text" class="form-control" id="usern" name="usern" placeholder="Can contain any character" required>
+              </div>
+              <div class="form-group">
+                <label for="passw">Password<font color="red">*</font></label>
+                <input type="password" class="form-control" id="passw" placeholder="6-16 characters" name="passw" required>
               </div>
               <div class="form-group">
                 <label for="email">Email<font color="red">*</font></label>
@@ -109,7 +117,7 @@
               <div class="form-group">
                 <label for="dob">Date of Birth<font color="red">*</font></label>
                 <div class='input-group date' id='datepick' data-provide="datepicker">
-                    <input type='text' class="form-control" placeholder="dd/mm/yyyy" name='dob' data-format="dd/mm/yyyy" required>
+                    <input type='text' class="form-control" placeholder="yyyy-mm-dd" name='dob' required>
                     <span class="input-group-addon">
                         <span class="glyphicon glyphicon-th"></span>
                     </span>
@@ -117,7 +125,7 @@
               </div>
               <div class="form-group">
                 <label for="phone">Phone Number</label>
-                <input type="tel" class="form-control" id="phone" name="phone" placeholder="">
+                <input type="tel" class="form-control" id="phone" name="phone">
               </div>
               <button type="submit" class="btn btn-success btn-block">Register</button>
             </form>
@@ -153,14 +161,15 @@ $(document).ready(function(){
 
   $(document).ready(function(){
     $("#phone").intlTelInput({
-      preferredCountries: []
+      preferredCountries: [],
+      nationalMode: false
     });
   });
 
   $(document).ready(function(){
     $('#datepick').datepicker({
-      format: 'dd/mm/yyyy',
-      startDate: '01/01/1900',
+      format:'yyyy-mm-dd',
+      startDate: '1900-01-01'
     }).on('changeDate', function(ev){
       $(this).datepicker('hide');
     });

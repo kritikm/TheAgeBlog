@@ -46,38 +46,4 @@
 </div>
 
 <script>
-$(document).ready(function(){
-    $("#login").click(function(){
-        $("#loginModal").modal();
-    });
-});
-
-$(document).ready(function(){
-  $("#register").click(function(){
-    $("#registerModal").modal();
-  });
-});
-
-$(document).ready(function(){
-  $("#signup").click(function(){
-    $("#registerModal").modal();
-  });
-
-
-  $(document).ready(function(){
-    $("#phone").intlTelInput({
-      preferredCountries: []
-    });
-  });
-
-  $(document).ready(function(){
-    $('#datepick').datepicker({
-      format: 'dd/mm/yyyy',
-      startDate: '01/01/1900',
-    }).on('changeDate', function(ev){
-      $(this).datepicker('hide');
-    });
-  });
-});
-
 </script>
